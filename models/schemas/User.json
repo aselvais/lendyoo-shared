@@ -1,13 +1,14 @@
 {
-	"authType": {"type": "String", "required": true, "default": "lendyoo", "enum": ["lendyoo","facebook","twitter","google"]},
-	"isRegistered": {"type": "Boolean", "default": true},
-	"username": {"type": "String", "lowercase": true, "required": true},
-	"password": {"type": "String", "required": true},
-	"fname": {"type": "String", "required": false},
-	"lname": {"type": "String", "required": false},
-	"gender": {"type": "String", "required": false, "default": "M", "enum": ["M","F"]},
-	"email": {"type": "String", "required": true},
-	"DoB": {"type": "Date", "required": false},
-	"created": { "type": "Date" },
-	"updated": { "type": "Date"}
+  "authType": {"type": "String", "required": true, "default": "lendyoo", "enum": ["lendyoo","facebook","twitter","google"]},
+  "isRegistered": {"type": "Boolean", "default": true},
+  "username": {"type": "String", "lowercase": true, "required": true},
+  "password": {"type": "String", "required": true},
+  "fname": {"type": "String", "required": false},
+  "lname": {"type": "String", "required": false},
+  "gender": {"type": "String", "required": false, "default": "M", "enum": ["M","F"]},
+  "email": {"type": "String", "required": true},
+  "DoB": {"type": "Date", "required": false},
+  "created": { "type": "Date" },
+  "updated": { "type": "Date"},
+  "role": {"type": "String", "required": true, "default": "customer", "enum": ["anonymous","customer","accountadmin","admin","superadmin","god"]}
 }
