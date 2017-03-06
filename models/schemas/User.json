@@ -11,5 +11,5 @@
   "DoB": {"type": "Date", "required": false},
   "created": { "type": "Date" },
   "updated": { "type": "Date"},
-  "role": {"type": "String", "required": true, "default": "customer", "enum": ["anonymous","customer","accountadmin","admin","superadmin","god"]}
+  "role": {"type": "String", "required": true, "default": "customer", "enum": ["anonymous","customer","groupadmin","admin","superadmin","god"]}
 }
