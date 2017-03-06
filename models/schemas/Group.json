@@ -1,0 +1,13 @@
+{
+  "isActive": {"type": "Boolean", "default": true},
+  "name": {"type": "String", "lowercase": true, "required": true},
+  "password": {"type": "String", "required": true},
+  "email": {"type": "String", "required": true},
+  "address": {"type": "String", "required": true},
+  "zipcode": {"type": "String", "required": true},
+  "state": {"type": "String", "required": true},
+  "country": {"type": "String", "required": true},
+  "created": { "type": "Date" },
+  "updated": { "type": "Date"},
+  "type": {"type": "String", "required": true, "default": "company", "enum": ["standard","company"]}
+}
