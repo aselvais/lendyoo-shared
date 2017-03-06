@@ -8,8 +8,8 @@
   "lname": {"type": "String", "required": false},
   "gender": {"type": "String", "required": false, "default": "M", "enum": ["M","F"]},
   "email": {"type": "String", "required": true},
-  "DoB": {"type": "Date", "required": false},
-  "created": { "type": "Date" },
-  "updated": { "type": "Date"},
+  "dateOfBirth": {"type": "Date", "required": false},
+  "dateCreated": { "type": "Date" },
+  "dateUpdated": { "type": "Date"},
   "role": {"type": "String", "required": true, "default": "customer", "enum": ["anonymous","customer","accountadmin","admin","superadmin","god"]}
 }

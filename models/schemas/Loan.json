@@ -6,9 +6,9 @@
   "isSaved": {"type": "Boolean"},
   "title": {"type": "String"},
   "detail": {"type": "String"},
-  "loanDate": {"type": "Date"},
-  "loanExpirationDate": {"type": "Date"},
-  "lastReminderSent": {"type": "Date"},
+  "dateCreated": {"type": "Date"},
+  "dateExpiration": {"type": "Date"},
+  "dateLastReminder": {"type": "Date"},
   "sendReminders": {"type": "Number"},
   "remindersFrequency": {"type": "Number"},
   "status": {"type": "String", "required": true, "default": "open", "enum": ["open","expired","closed"]}

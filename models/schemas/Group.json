@@ -7,7 +7,7 @@
   "zipcode": {"type": "String", "required": true},
   "state": {"type": "String", "required": true},
   "country": {"type": "String", "required": true},
-  "created": { "type": "Date" },
-  "updated": { "type": "Date"},
+  "dateCreated": { "type": "Date" },
+  "dateUpdated": { "type": "Date"},
   "type": {"type": "String", "required": true, "default": "company", "enum": ["standard","company"]}
 }
