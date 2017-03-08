@@ -1,8 +1,6 @@
 import UserAbstract from '../UserAbstract';
 import _schema from '../schemas/User.json';
 
-// let instance = null;
-
 /**
  * The application registered used.
  */
@@ -11,15 +9,9 @@ class User extends UserAbstract
 
 	constructor(params={})
 	{
-	//	if(!instance){
-			super(params);
-			this.setSchema(_schema);
-	//		instance = this;
-	//	}
-	//	return instance;
-
+		super(params);
+		this.setSchema(_schema);
 	}
-
 
 }
 

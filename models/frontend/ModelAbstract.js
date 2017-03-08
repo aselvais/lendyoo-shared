@@ -5,10 +5,19 @@ class ModelAbstract
 {
 
 	/**
-	 *
+	 * Constructor
+	 * @param {object} params Object composed of key:vals to push in the model
+	 */
+	constructor(params={})
+	{
+		this.populateParams(params);
+	}
+
+	/**
+	 * Set params to local model properties
 	 * @param params
 	 */
-	constructor(params)
+	populateParams(params)
 	{
 		if (typeof params === 'object')
 		{
@@ -35,6 +44,41 @@ class ModelAbstract
 					this[e] = (schema[e].default ? schema[e].default : null);
 			}
 		}
+	}
+
+	/**
+	 *
+	 * @param _id
+	 * @returns {Promise.<TResult>}
+	 */
+	populateDataFromRemote(_id='')
+	{
+		var _that = this;
+		return fetch('http://localhost:3010/api/user/getone/' + _id).then(
+			function(res)
+			{
+				if (res.status === 200)
+				{
+					return res.json().then(function (d)
+					{
+						if (typeof d.error !== 'undefined' && d.error === 0 && d.data)
+						{
+							_that.populateParams(d.data);
+							return true;
+						}
+						else
+						{
+							return false;
+						}
+					});
+				}
+				return false;
+			},
+			function(e){
+				return false;
+			}
+		);
+
 	}
 
 }
