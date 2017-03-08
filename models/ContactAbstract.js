@@ -1,4 +1,4 @@
-import ModelAbstract from './frontend/ModelAbstract';
+import ModelAbstract from '../../models/ModelAbstract';
 
 /**
  *
