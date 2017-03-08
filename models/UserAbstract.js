@@ -1,7 +1,9 @@
+import ModelAbstract from '../../models/ModelAbstract';
+
 /**
  *
  */
-class UserAbstract
+class UserAbstract extends ModelAbstract
 {
 
 	get fullName()
