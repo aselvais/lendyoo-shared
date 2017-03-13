@@ -54,7 +54,8 @@ class ModelAbstract
 	populateDataFromRemote(_id='')
 	{
 		var _that = this;
-		return fetch('http://localhost:3010/api/user/getone/' + _id).then(
+		var _qurl = 'http://localhost:3010/api/'+this.schemaName+'/getone/' + _id;
+		return fetch(_qurl).then(
 			function(res)
 			{
 				if (res.status === 200)

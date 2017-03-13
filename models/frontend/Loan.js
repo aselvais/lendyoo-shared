@@ -4,17 +4,13 @@ import _schema from '../schemas/Loan.json';
 /**
  * Loan model
  */
-class Loan extends LoanAbstract
+class Loan extends ModelAbstract
 {
 
 	constructor(params={})
 	{
-		if(!instance){
-			super(params);
-			this.setSchema(_schema);
-			instance = this;
-		}
-		return instance;
+		super(params);
+		this.setSchema(_schema);
 	}
 
 	/**
