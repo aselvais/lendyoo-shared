@@ -1,3 +1,6 @@
+import Config from './Config';
+
+
 /**
  * Abstract client model
  */
@@ -10,6 +13,7 @@ class ModelAbstract
 	 */
 	constructor(params={})
 	{
+		this.config = new Config();
 		this.populateParams(params);
 	}
 
@@ -54,7 +58,7 @@ class ModelAbstract
 	populateDataFromRemote(_id='')
 	{
 		var _that = this;
-		var _qurl = 'http://localhost:3010/api/'+this.schemaName+'/getone/' + _id;
+		var _qurl = this.config.API_URL + '/api/'+this.schemaName+'/getone/' + _id;
 		return fetch(_qurl).then(
 			function(res)
 			{
