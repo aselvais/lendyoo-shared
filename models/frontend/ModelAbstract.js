@@ -83,7 +83,6 @@ class ModelAbstract
 				return false;
 			}
 		);
-
 	}
 
 }
