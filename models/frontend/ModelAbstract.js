@@ -62,7 +62,7 @@ class ModelAbstract {
 	 */
 	populateDataFromRemote(_id = '') {
 		var _that = this;
-		var _qurl = this.config.API_URL + '/api/' + this.schemaName + '/getone/' + _id;
+		var _qurl = this.config.API_URL + '/api-v2/' + this.schemaName + '/getone/' + _id;
 		return fetch(_qurl).then(
 			function (res) {
 				if (res.status === 200) {
@@ -92,7 +92,7 @@ class ModelAbstract {
 	save() {
 
 		var _that = this;
-		var _qurl = this.config.API_URL + '/api/' + this.schemaName + '/save/';
+		var _qurl = this.config.API_URL + '/api-v2/' + this.schemaName + '/save/';
 
 		return fetch(_qurl, {
 			method: "POST",

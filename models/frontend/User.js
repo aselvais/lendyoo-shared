@@ -22,7 +22,7 @@ class User extends UserAbstract
 	authenticate(username='', password='')
 	{
 		var _that = this;
-		var _qurl = this.config.API_URL + '/api/'+this.schemaName+'/auth/';
+		var _qurl = this.config.API_URL + '/api-v2/'+this.schemaName+'/auth/';
 
 		return fetch(_qurl, {
 			method: "POST",
