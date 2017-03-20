@@ -1,10 +1,10 @@
-import ModelAbstract from './ModelAbstract';
+import LoanAbstract from '../LoanAbstract';
 import _schema from '../schemas/Loan.json';
 
 /**
  * Loan model
  */
-class Loan extends ModelAbstract
+class Loan extends LoanAbstract
 {
 
 	constructor(params={})
@@ -20,15 +20,6 @@ class Loan extends ModelAbstract
 	{
 		this.loanExpirationDate = this.loanDate.setMonth(this.loanDate.getMonth()+2);
 	}
-
-	/**
-	 * @todo implement this thing
-	 */
-	save()
-	{
-		// this.Console.log('Loan.save() Save the thing ...');
-	}
-
 
 
 }

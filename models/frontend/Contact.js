@@ -1,4 +1,4 @@
-import ModelAbstract from './ModelAbstract';
+import ContactAbstract from '../ContactAbstract';
 import _schema from '../schemas/Contact.json';
 
 /**
@@ -6,7 +6,7 @@ import _schema from '../schemas/Contact.json';
  * Person you can lend an item to
  *
  */
-class Contact extends ModelAbstract
+class Contact extends ContactAbstract
 {
 
 	constructor(params={})

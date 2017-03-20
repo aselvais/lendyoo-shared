@@ -13,6 +13,8 @@ class ModelAbstract {
 	constructor(params = {}) {
 		this.config = new Config();
 		this.populateParams(params);
+		// container for the validation error structured as {error:1, message: '', data; {}}
+		this.validationErrorObject = null;
 	}
 
 	/**
@@ -105,9 +107,11 @@ class ModelAbstract {
 					return res.json().then(function (d) {
 						if (typeof d.error !== 'undefined' && d.error === 0 && d.data) {
 							_that.populateParams(d.data);
+							_that.validationErrorObject = d;
 							return true;
 						}
 						else {
+							_that.validationErrorObject = d;
 							return false;
 						}
 					});
