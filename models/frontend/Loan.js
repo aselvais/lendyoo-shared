@@ -22,6 +22,7 @@ class Loan extends LoanAbstract
 	}
 
 
+
 }
 
 export default Loan;

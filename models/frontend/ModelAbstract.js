@@ -1,6 +1,5 @@
 import Config from './Config';
 
-
 /**
  * Abstract client model
  */
