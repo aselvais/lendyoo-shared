@@ -37,11 +37,17 @@ class CollectionAbstract
 	 * @param filter
 	 * @returns {Promise.<U>|*|Promise.<TResult>}
 	 */
-	setRemoteCollection( filter={} )
+	setRemoteCollection( filter={}, clearCurrentCollection=true )
 	{
 		var _that = this;
-		var _qurl = this.config.API_URL + '/api-v2/' + this.collectionName + '/getcollection/';
 
+		if (clearCurrentCollection === true)
+		{
+			this.models = [];
+		}
+
+
+		var _qurl = this.config.API_URL + '/api-v2/' + this.collectionName + '/getcollection/';
 		return fetch(_qurl, {
 			method: "POST",
 			headers: {'Content-Type':'application/x-www-form-urlencoded'},
