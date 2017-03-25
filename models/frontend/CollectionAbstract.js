@@ -54,7 +54,7 @@ class CollectionAbstract
 			body: 'json=' + encodeURIComponent(JSON.stringify(filter))
 		}).then(
 			function (res) {
-				console.log(res);
+				//console.log(res);
 				if (res.status === 200) {
 					return res.json().then(function (d) {
 						if (typeof d.error !== 'undefined' && d.error === 0 && d.data) {
@@ -69,7 +69,7 @@ class CollectionAbstract
 					return false;
 			},
 			function (e) {
-				console.log(e);
+				//console.log(e);
 				return false;
 			}
 		);

@@ -34,7 +34,7 @@ class User extends UserAbstract
 		}).then(
 			function(res)
 			{
-				console.log(res);
+				//console.log(res);
 				if (res.status === 200)
 				{
 					return res.json().then(function (d)
@@ -53,7 +53,7 @@ class User extends UserAbstract
 					return false;
 			},
 			function(e){
-				console.log(e);
+				//console.log(e);
 				return false;
 			}
 		);

@@ -12,7 +12,7 @@ class Config
 	 * @param _env
 	 * @returns {*}
 	 */
-	constructor(_env = 'development')
+	constructor(_env = 'production')
 	{
 		if (!instance)
 		{
