@@ -11,7 +11,7 @@ class CollectionAbstract
 	 */
 	constructor()
 	{
-		this.config = new Config(process.env.NODE_ENVç);
+		this.config = new Config(process.env.NODE_ENV);
 		// collection of models
 		this.models = [];
 		// the current model we are working on
