@@ -10,7 +10,7 @@ class ModelAbstract {
 	 * @param {object} params Object composed of key:vals to push in the model
 	 */
 	constructor(params = {}) {
-		this.config = new Config();
+		this.config = new Config(process.env.NODE_ENV);
 		this.populateParams(params);
 		// container for the validation error structured as {error:1, message: '', data; {}}
 		this.validationErrorObject = null;
@@ -108,6 +108,43 @@ class ModelAbstract {
 							_that.populateParams(d.data);
 							_that.validationErrorObject = d;
 							return true;
+						}
+						else {
+							_that.validationErrorObject = d;
+							return false;
+						}
+					});
+				} else
+					return false;
+			},
+			function (e) {
+				console.log(e);
+				return false;
+			}
+		);
+	}
+
+	/**
+	 *
+	 * @returns {Promise.<TResult>}
+	 */
+	delete()
+	{
+		var _that = this;
+		var _qurl = this.config.API_URL + '/api-v2/' + this.schemaName + '/delete/';
+
+		return fetch(_qurl, {
+			method: "POST",
+			headers: {'Content-Type':'application/x-www-form-urlencoded'},
+			body: 'json=' + encodeURIComponent(JSON.stringify(_that.getJsonData()))
+		}).then(
+			function (res) {
+				console.log(res);
+				if (res.status === 200) {
+					return res.json().then(function (d) {
+						if (typeof d.error !== 'undefined' && d.error === 0 && d.data) {
+							delete this;
+							return d;
 						}
 						else {
 							_that.validationErrorObject = d;

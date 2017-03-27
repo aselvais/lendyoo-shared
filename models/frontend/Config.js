@@ -20,6 +20,7 @@ class Config
 			this._env = _env;
 			this.parseConfigFile();
 			instance = this;
+			// console.warn(instance);
 		}
 		return instance;
 	}
@@ -32,10 +33,12 @@ class Config
 		if (_cfg.defaults && _cfg[this._env])
 		{
 			var _t = Object.assign({}, _cfg.defaults, _cfg[this._env]);
-			for (var t in _t)
-			{
-				this[t] = _t[t];
-			}
+				for (var t in _t)
+				{
+					if (_t[t]) {
+						this[t] = _t[t];
+					}
+				}
 		}
 	}
 

@@ -17,18 +17,6 @@ class ContactCollection extends CollectionAbstract
 
 	/**
 	 *
-	 * @param contacts
-	 */
-	/*setContacts( contacts=[] )
-	{
-		for (var i=0; i < contacts.length; i++)
-		{
-			this.addModel( new Contact(contacts[i]) );
-		}
-	}*/
-
-	/**
-	 *
 	 * @param User_id
 	 * @returns {*}
 	 */
