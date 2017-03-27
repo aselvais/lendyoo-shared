@@ -69,7 +69,7 @@ class CollectionAbstract
 					return false;
 			},
 			function (e) {
-				console.log(e);
+				//console.log(e);
 				return false;
 			}
 		);
