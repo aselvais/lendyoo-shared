@@ -111,7 +111,16 @@ class CollectionAbstract
 	 */
 	setActiveModel( model )
 	{
-		this.activeModel = model;
+		for (var i=0; i < this.models.length; i++)
+		{
+			if (model === this.models[i])
+			{
+				this.activeModel = this.models[i];
+				this.models[i]._isActive = true;
+			}
+			else
+				this.models[i]._isActive = false;
+		}
 	}
 
 	/**
