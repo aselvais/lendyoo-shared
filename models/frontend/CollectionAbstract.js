@@ -123,7 +123,7 @@ class CollectionAbstract
 	{
 		for (var i=0; i < this.models.length; i++)
 		{
-			if (this.models[i]._id == id)
+			if (this.models[i]._id === id)
 				return this.models[i];
 		}
 		return null;
