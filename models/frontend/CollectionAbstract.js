@@ -85,6 +85,18 @@ class CollectionAbstract
 	}
 
 	/**
+	 * Remove a model from an array
+	 * @param model
+	 */
+	removeModel( model )
+	{
+		var index = this.models.indexOf( model );
+		if (index > -1) {
+			this.models.splice(index, 1);
+		}
+	}
+
+	/**
 	 *
 	 * @returns {ModelAbstract|null}
 	 */
