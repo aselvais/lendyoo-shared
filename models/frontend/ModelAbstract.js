@@ -35,6 +35,10 @@ class ModelAbstract {
 	 */
 	getJsonData() {
 		var toret={};
+		if (this._id)
+		{
+			toret._id = this._id;
+		}
 		for (var e in this._schema) {
 			if (this[e])
 				toret[e] = this[e];
