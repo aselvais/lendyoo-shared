@@ -2,7 +2,7 @@
   "Group_id": {"type": "String", "required": true},
   "User_id": {"type": "String", "required": true},
   "Contact_id": {"type": "String", "required": true},
-  "photo": {"type": "String"},
+  "Photo_id": {"type": "String"},
   "isSaved": {"type": "Boolean"},
   "title": {"type": "String"},
   "detail": {"type": "String"},
