@@ -37,12 +37,17 @@ class Photo extends PhotoAbstract
 					_that.width = width;
 					_that.height = height;
 				});
+
+			_that.data = RNFetchBlob.wrap(_that.localpath);
+
+
 		} catch (er)
 		{
 			console.log(er);
 		}
 		console.log('-------------------');
 		console.log(_that.getJsonData());
+		console.log(_that);
 	}
 
 }
