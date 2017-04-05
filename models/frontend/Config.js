@@ -12,14 +12,22 @@ class Config
 	 * @param _env
 	 * @returns {*}
 	 */
-	constructor(_env = 'production')
+	// constructor(_env = 'production')
+	constructor(_env = 'development')
 	{
 		if (!instance)
 		{
 			this.instanceTime = new Date();
-			this._env = _env;
+			// this._env = _env;
+			this._env = process.env.NODE_ENV;
+			this.debug = false;
+			if (this._env == 'development')
+			{
+				this.debug = true;
+			}
 			this.parseConfigFile();
 			instance = this;
+
 			// console.warn(instance);
 		}
 		return instance;
