@@ -33,21 +33,17 @@ class Photo extends PhotoAbstract
 		try {
 			Image.getSize(_that.localpath,
 				function(width, height) {
-					console.log('---------- '+width +' x '+ height+' ---------');
 					_that.width = width;
 					_that.height = height;
 				});
 
-			_that.data = RNFetchBlob.wrap(_that.localpath);
+			RNFetchBlob.fs.readFile(_that.localpath, 'base64').then(
+				function(data) {
+					_that.data = data;
+				}
+			);
 
-
-		} catch (er)
-		{
-			console.log(er);
-		}
-		console.log('-------------------');
-		console.log(_that.getJsonData());
-		console.log(_that);
+		} catch (er) {}
 	}
 
 }

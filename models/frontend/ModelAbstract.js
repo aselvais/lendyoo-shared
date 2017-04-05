@@ -119,7 +119,10 @@ class ModelAbstract {
 						}
 					});
 				} else
+				{
+					console.log(res);
 					return false;
+				}
 			},
 			function (e) {
 				//console.log(e);
