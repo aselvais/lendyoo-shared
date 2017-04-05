@@ -24,7 +24,9 @@ class ModelAbstract {
 		if (typeof params === 'object') {
 			for (var e in params) {
 				if (params[e])
+				{
 					this[e] = params[e];
+				}
 			}
 		}
 	}

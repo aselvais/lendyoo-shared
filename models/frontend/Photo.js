@@ -46,6 +46,36 @@ class Photo extends PhotoAbstract
 		} catch (er) {}
 	}
 
+	/**
+	 *
+	 * @param _id
+	 * @returns {Promise.<U>|*|Promise.<TResult>}
+	 */
+	populateDataFromRemoteByLoanId(_id = '') {
+		var _that = this;
+		var _qurl = this.config.API_URL + '/api-v2/' + this.schemaName + '/getonebyloanid/' + _id;
+		return fetch(_qurl).then(
+			function (res) {
+				if (res.status === 200) {
+					return res.json().then(function (d) {
+						if (typeof d.error !== 'undefined' && d.error === 0 && d.data) {
+							_that.populateParams(d.data);
+							return true;
+						}
+						else {
+							return false;
+						}
+					});
+				}
+				return false;
+			},
+			function (e) {
+				return false;
+			}
+		);
+	}
+
+
 }
 
 export default Photo;
