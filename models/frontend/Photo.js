@@ -21,9 +21,9 @@ class Photo extends PhotoAbstract
 		super(params);
 		this.setSchema(_schema);
 	}
-
 	/**
 	 *
+	 * @returns {*|Promise.<TResult>}
 	 */
 	initImage()
 	{
@@ -37,7 +37,7 @@ class Photo extends PhotoAbstract
 					_that.height = height;
 				});
 
-			RNFetchBlob.fs.readFile(_that.localpath, 'base64').then(
+			return RNFetchBlob.fs.readFile(_that.localpath, 'base64').then(
 				function(data) {
 					_that.data = data;
 				}
