@@ -21,7 +21,10 @@ class Contact extends ContactAbstract
 	 */
 	getFullName()
 	{
-		return this.name;
+		if (this.name)
+			return this.name;
+		else
+			return this.firstName + ' ' + this.lastName;
 	}
 
 }
