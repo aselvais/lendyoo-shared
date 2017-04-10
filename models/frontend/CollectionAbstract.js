@@ -138,6 +138,21 @@ class CollectionAbstract
 		return null;
 	}
 
+	/**
+	 *
+	 * @param name
+	 * @returns {string}
+	 */
+	getModelByName( name )
+	{
+		for (var i=0; i < this.models.length; i++)
+		{
+			if (this.models[i].name === name)
+				return this.models[i];
+		}
+		return null;
+	}
+
 }
 
 export default CollectionAbstract;
