@@ -23,7 +23,6 @@ class User extends UserAbstract
 	{
 		var _that = this;
 		var _qurl = this.config.API_URL + '/api-v2/'+this.schemaName+'/auth/';
-
 		return fetch(_qurl, {
 			method: "POST",
 			headers: {
@@ -53,7 +52,6 @@ class User extends UserAbstract
 					return false;
 			},
 			function(e){
-				//console.log(e);
 				return false;
 			}
 		);
