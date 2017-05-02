@@ -14,7 +14,14 @@ class UserAbstract extends ModelAbstract
 
 	get fullName()
 	{
-		return this.fname + ' ' + this.lname;
+		if (this.fname && this.lname)
+			return this.fname + ' ' + this.lname;
+		else if (this.fname)
+			return this.fname;
+		else if (this.username)
+			return this.username;
+		else
+			return '';
 	}
 
 }
