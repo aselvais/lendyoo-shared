@@ -1,26 +1,28 @@
 import PhotoAbstract from '../PhotoAbstract';
 import _schema from '../schemas/Photo.json';
 // for react native
-import RNFetchBlob from 'react-native-fetch-blob';
+// import RNFetchBlob from 'react-native-fetch-blob';
+// import React from 'react';
+// import { Image } from 'react-native';
 
-import React from 'react';
-import { Image } from 'react-native';
+
+let RNFetchBlob = null;
 
 /**
  *
  */
-class Photo extends PhotoAbstract
-{
+class Photo extends PhotoAbstract {
 
 	/**
 	 *
 	 * @param params
 	 */
-	constructor(params={})
+	constructor(params = {})
 	{
 		super(params);
 		this.setSchema(_schema);
 	}
+
 	/**
 	 *
 	 * @returns {*|Promise.<TResult>}
@@ -30,20 +32,34 @@ class Photo extends PhotoAbstract
 		var _that = this;
 		_that.width = 0;
 		_that.height = 0;
-		try {
-			Image.getSize(_that.localpath,
-				function(width, height) {
-					_that.width = width;
-					_that.height = height;
-				});
+		try
+		{
+			if (Image && Image.getSize)
+			{
+				Image.getSize(_that.localpath,
+					function (width, height)
+					{
+						_that.width = width;
+						_that.height = height;
+					});
+			}
+			if (RNFetchBlob && RNFetchBlob.fs && RNFetchBlob.fs.readFile)
+			{
+				return RNFetchBlob.fs.readFile(_that.localpath, 'base64').then(
+					function (data)
+					{
+						_that.data = data;
+					}
+				);
+			}
+			else
+			{
+				return null;
+			}
 
-			return RNFetchBlob.fs.readFile(_that.localpath, 'base64').then(
-				function(data) {
-					_that.data = data;
-				}
-			);
-
-		} catch (er) {}
+		} catch (er)
+		{
+		}
 	}
 
 	/**
@@ -51,25 +67,32 @@ class Photo extends PhotoAbstract
 	 * @param _id
 	 * @returns {Promise.<U>|*|Promise.<TResult>}
 	 */
-	populateDataFromRemoteByLoanId(_id = '') {
+	populateDataFromRemoteByLoanId(_id = '')
+	{
 		var _that = this;
 		var _qurl = this.config.API_URL + '/api-v2/' + this.schemaName + '/getonebyloanid/' + _id;
 		return fetch(_qurl).then(
-			function (res) {
-				if (res.status === 200) {
-					return res.json().then(function (d) {
-						if (typeof d.error !== 'undefined' && d.error === 0 && d.data) {
+			function (res)
+			{
+				if (res.status === 200)
+				{
+					return res.json().then(function (d)
+					{
+						if (typeof d.error !== 'undefined' && d.error === 0 && d.data)
+						{
 							_that.populateParams(d.data);
 							return true;
 						}
-						else {
+						else
+						{
 							return false;
 						}
 					});
 				}
 				return false;
 			},
-			function (e) {
+			function (e)
+			{
 				return false;
 			}
 		);

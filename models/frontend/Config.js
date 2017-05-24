@@ -20,7 +20,7 @@ class Config
 			this._env = process.env.NODE_ENV;
 			// this._env = _env;
 			this.debug = false;
-			if (this._env == 'development')
+			if (this._env === 'development')
 				this.debug = true;
 			this.parseConfigFile();
 			instance = this;
