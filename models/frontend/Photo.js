@@ -1,12 +1,11 @@
 import PhotoAbstract from '../PhotoAbstract';
 import _schema from '../schemas/Photo.json';
 // for react native
-// import RNFetchBlob from 'react-native-fetch-blob';
-// import React from 'react';
-// import { Image } from 'react-native';
+import RNFetchBlob from 'react-native-fetch-blob';
+import React from 'react';
+import { Image } from 'react-native';
 
-
-let RNFetchBlob = null;
+// let RNFetchBlob = null;
 
 /**
  *
@@ -56,7 +55,6 @@ class Photo extends PhotoAbstract {
 			{
 				return null;
 			}
-
 		} catch (er)
 		{
 		}
