@@ -93,8 +93,7 @@ class ModelAbstract {
 
 	/**
 	 *
-	 * @param _id
-	 * @returns {Promise.<TResult>}
+	 * @returns {*|Promise.<U>|Promise.<TResult>}
 	 */
 	save() {
 
@@ -109,7 +108,7 @@ class ModelAbstract {
 			function (res) {
 				//console.log(res);
 				if (res.status === 200) {
-					return res.json().then(function (d) {
+					res.json().then(function (d) {
 						if (typeof d.error !== 'undefined' && d.error === 0 && d.data) {
 							_that.populateParams(d.data);
 							_that.validationErrorObject = d;
