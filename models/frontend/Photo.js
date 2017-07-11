@@ -1,7 +1,7 @@
 import PhotoAbstract from '../PhotoAbstract';
 import _schema from '../schemas/Photo.json';
 // for react native
-import RNFetchBlob from 'react-native-fetch-blob';
+// import RNFetchBlob from 'react-native-fetch-blob';
 import React from 'react';
 import { Image } from 'react-native';
 
@@ -42,22 +42,16 @@ class Photo extends PhotoAbstract {
 						_that.height = height;
 					});
 			}
-			if (RNFetchBlob && RNFetchBlob.fs && RNFetchBlob.fs.readFile)
-			{
-				return RNFetchBlob.fs.readFile(_that.localpath, 'base64').then(
-					function (data)
-					{
-						_that.data = data;
-					}
-				);
-			}
-			else
-			{
-				return null;
-			}
 		} catch (er)
 		{
 		}
+		// gets the filename
+		if (this.localpath)
+		{
+			var spl = this.localpath.split("/");
+			this.filename = spl.pop();
+		}
+
 	}
 
 	/**
