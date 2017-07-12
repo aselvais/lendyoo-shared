@@ -92,7 +92,7 @@ class ModelAbstract {
 	}
 
 	/**
-	 *
+	 * Save the model after an update or a create
 	 * @returns {*|Promise.<U>|Promise.<TResult>}
 	 */
 	save() {
