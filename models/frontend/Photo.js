@@ -80,20 +80,37 @@ class Photo extends PhotoAbstract {
 	initFilename() {
 		var _fln = {};
 		// gets the filename
-		if (this.localpath && this.localpath != '') {
-			var spl = this.localpath.split("?");
-			this.filename = spl.pop();
-			var spl2 = spl[1].split('&');
-			spl2.forEach(function(e){
-				var f = e.plit('=');
-				_fln[f[0]] = f[1];
-			});
-			if (_fln.id && _fln.ext)
-			{
-				this.name = _fln.id;
-				this.ext = _fln.ext;
-				this.filename = _fln.id + '.' + _fln.ext;
+		var s = this.localpath.split("/");
+		this.filename = s.pop();
+		var so = this.filename.split('.');
+		if (so[1])
+		{
+			this.ext = so[1].toLowerCase();
+			this.name = so[0];
+		}
+		try {
+			if (this.localpath && this.localpath != '' && this.localpath.split("?")) {
+				var spl = this.localpath.split("?");
+				if (spl[1])
+				{
+					var spl2 = spl[1].split('&');
+					for (var i=0; i < spl2.length; i++)
+					{
+						var f = spl2[i].split('=');
+						if (f.length && f.length == 2)
+							_fln[f[0]] = f[1];
+					}
+					if (_fln.id && _fln.ext)
+					{
+						this.name = _fln.id;
+						this.ext = _fln.ext.toLowerCase();
+						this.filename = _fln.id + '.' + _fln.ext;
+					}
+				}
 			}
+		} catch(e)
+		{
+			console.log(e);
 		}
 	}
 
@@ -113,13 +130,12 @@ class Photo extends PhotoAbstract {
 	uploadImage() {
 		var _that = this;
 		var _qurl = this.config.API_URL + '/api-v2/' + this.schemaName + '/uploadfile/';
-
 		if (this.localpath && this.localpath != '') {
 			return RNFetchBlob.fetch('POST', _qurl, {
 				'Content-Type': 'multipart/form-data'
 			},
 				[
-					{ name : this.name, filename : this.filename, data: RNFetchBlob.wrap(_that.localpath)}
+					{ name : this.name, filename : this._id + '.' + this.ext, data: RNFetchBlob.wrap(_that.localpath)}
 				]
 			)
 			// listen to upload progress event
