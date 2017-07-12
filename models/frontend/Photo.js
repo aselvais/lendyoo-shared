@@ -1,11 +1,9 @@
 import PhotoAbstract from '../PhotoAbstract';
 import _schema from '../schemas/Photo.json';
 // for react native
-// import RNFetchBlob from 'react-native-fetch-blob';
+import RNFetchBlob from 'react-native-fetch-blob';
 import React from 'react';
-import { Image } from 'react-native';
-
-// let RNFetchBlob = null;
+import {Image} from 'react-native';
 
 /**
  *
@@ -16,8 +14,7 @@ class Photo extends PhotoAbstract {
 	 *
 	 * @param params
 	 */
-	constructor(params = {})
-	{
+	constructor(params = {}) {
 		super(params);
 		this.setSchema(_schema);
 	}
@@ -26,32 +23,9 @@ class Photo extends PhotoAbstract {
 	 *
 	 * @returns {*|Promise.<TResult>}
 	 */
-	initImage()
-	{
-		var _that = this;
-		_that.width = 0;
-		_that.height = 0;
-		try
-		{
-			if (Image && Image.getSize)
-			{
-				Image.getSize(_that.localpath,
-					function (width, height)
-					{
-						_that.width = width;
-						_that.height = height;
-					});
-			}
-		} catch (er)
-		{
-		}
-		// gets the filename
-		if (this.localpath)
-		{
-			var spl = this.localpath.split("/");
-			this.filename = spl.pop();
-		}
-
+	initImage() {
+		this.initImageSize();
+		this.initFilename();
 	}
 
 	/**
@@ -59,35 +33,107 @@ class Photo extends PhotoAbstract {
 	 * @param _id
 	 * @returns {Promise.<U>|*|Promise.<TResult>}
 	 */
-	populateDataFromRemoteByLoanId(_id = '')
-	{
+	populateDataFromRemoteByLoanId(_id = '') {
 		var _that = this;
 		var _qurl = this.config.API_URL + '/api-v2/' + this.schemaName + '/getonebyloanid/' + _id;
 		return fetch(_qurl).then(
-			function (res)
-			{
-				if (res.status === 200)
-				{
-					return res.json().then(function (d)
-					{
-						if (typeof d.error !== 'undefined' && d.error === 0 && d.data)
-						{
+			function (res) {
+				if (res.status === 200) {
+					return res.json().then(function (d) {
+						if (typeof d.error !== 'undefined' && d.error === 0 && d.data) {
 							_that.populateParams(d.data);
 							return true;
 						}
-						else
-						{
+						else {
 							return false;
 						}
 					});
 				}
 				return false;
 			},
-			function (e)
-			{
+			function (e) {
 				return false;
 			}
 		);
+	}
+
+	/**
+	 * init the image size from the localpath
+	 */
+	initImageSize() {
+		var _that = this;
+		_that.width = 0;
+		_that.height = 0;
+		if (Image && Image.getSize && _that.localpath && _that.localpath != '') {
+			Image.getSize(_that.localpath,
+				function (width, height) {
+					_that.width = width;
+					_that.height = height;
+				});
+			Image;
+		}
+	}
+
+	/**
+	 * Init the filename param from the localpath
+	 */
+	initFilename() {
+		var _fln = {};
+		// gets the filename
+		if (this.localpath && this.localpath != '') {
+			var spl = this.localpath.split("?");
+			this.filename = spl.pop();
+			var spl2 = spl[1].split('&');
+			spl2.forEach(function(e){
+				var f = e.plit('=');
+				_fln[f[0]] = f[1];
+			});
+			if (_fln.id && _fln.ext)
+			{
+				this.name = _fln.id;
+				this.ext = _fln.ext;
+				this.filename = _fln.id + '.' + _fln.ext;
+			}
+		}
+	}
+
+	/**
+	 * Stores the metadata from the image to parameters
+	 * @todo To implement
+	 */
+	initMetaData() {
+
+	}
+
+	/**
+	 * Upload the image located at this.localpath
+	 * @todo To implement
+	 * @returns {*|Promise.<T>}
+	 */
+	uploadImage() {
+		var _that = this;
+		var _qurl = this.config.API_URL + '/api-v2/' + this.schemaName + '/uploadfile/';
+
+		if (this.localpath && this.localpath != '') {
+			return RNFetchBlob.fetch('POST', _qurl, {
+				'Content-Type': 'multipart/form-data'
+			},
+				[
+					{ name : this.name, filename : this.filename, data: RNFetchBlob.wrap(_that.localpath)}
+				]
+			)
+			// listen to upload progress event
+				.uploadProgress((written, total) => {
+					console.log('uploaded', [written, total, parseInt((written/total)*100) + '%' ])
+				})
+				// listen to download progress event
+				.progress((received, total) => {
+					console.log('progress', received, total)
+				})
+				.catch((err) => {
+					console.error(err);
+				});
+		}
 	}
 
 
