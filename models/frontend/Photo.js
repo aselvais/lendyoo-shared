@@ -82,13 +82,16 @@ class Photo extends PhotoAbstract {
 		// gets the filename
 		var s = this.localpath.split("/");
 		this.filename = s.pop();
+		// assign the name and extension if we can split by .
 		var so = this.filename.split('.');
 		if (so[1])
 		{
 			this.ext = so[1].toLowerCase();
 			this.name = so[0];
 		}
-		try {
+		// Get data from the localpath if it is URL encoded
+		try
+		{
 			if (this.localpath && this.localpath != '' && this.localpath.split("?")) {
 				var spl = this.localpath.split("?");
 				if (spl[1])
@@ -111,6 +114,11 @@ class Photo extends PhotoAbstract {
 		} catch(e)
 		{
 			console.log(e);
+		}
+		// figure out the ext from the file if we still don't have it
+		if ( (!this.ext || this.ext == '') && (this.localpath && this.localpath != '') )
+		{
+			// @todo do something here ... get data from the bin file
 		}
 	}
 
