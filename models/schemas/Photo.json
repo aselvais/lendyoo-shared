@@ -4,6 +4,5 @@
   "serverpath": {"type": "String", "required": false},
   "filename": {"type": "String", "required": false},
   "width": {"type": "Number", "required": false},
-  "height": {"type": "Number", "required": false},
-  "data": {"type": "String", "required": false}
+  "height": {"type": "Number", "required": false}
 }
