@@ -92,45 +92,46 @@ class ModelAbstract {
 	}
 
 	/**
-	 *
-	 * @param _id
-	 * @returns {Promise.<TResult>}
+	 * Save the model after an update or a create
+	 * @returns {*|Promise.<U>|Promise.<TResult>}
 	 */
 	save() {
 
 		var _that = this;
 		var _qurl = this.config.API_URL + '/api-v2/' + this.schemaName + '/save/';
 
-		return fetch(_qurl, {
-			method: "POST",
-			headers: {'Content-Type':'application/x-www-form-urlencoded'},
-			body: 'json=' + encodeURIComponent(JSON.stringify(_that.getJsonData()))
-		}).then(
-			function (res) {
-				//console.log(res);
-				if (res.status === 200) {
-					return res.json().then(function (d) {
-						if (typeof d.error !== 'undefined' && d.error === 0 && d.data) {
-							_that.populateParams(d.data);
-							_that.validationErrorObject = d;
-							return true;
-						}
-						else {
-							_that.validationErrorObject = d;
-							return false;
-						}
-					});
-				} else
-				{
-					console.log(res);
-					return false;
+
+		return new Promise(function(resolve, reject) {
+			fetch(_qurl, {
+				method: "POST",
+				headers: {'Content-Type':'application/x-www-form-urlencoded'},
+				body: 'json=' + encodeURIComponent(JSON.stringify(_that.getJsonData()))
+			}).then(
+				function (res) {
+					if (res.status === 200) {
+						res.json().then(function (d) {
+							if (typeof d.error !== 'undefined' && d.error === 0 && d.data) {
+								_that.populateParams(d.data);
+								_that.validationErrorObject = d;
+								resolve(true);
+							}
+							else {
+								_that.validationErrorObject = d;
+								reject(false);
+							}
+						});
+					} else
+					{
+						reject(false);
+					}
+				},
+				function (e) {
+					reject(false);
 				}
-			},
-			function (e) {
-				//console.log(e);
-				return false;
-			}
-		);
+			);
+		});
+
+
 	}
 
 	/**

@@ -3,6 +3,9 @@
   "localpath": {"type": "String", "required": false},
   "serverpath": {"type": "String", "required": false},
   "filename": {"type": "String", "required": false},
+  "name": {"type": "String", "required": false},
+  "ext": {"type": "String", "required": false},
+  "size": {"type": "Number", "required": false},
   "width": {"type": "Number", "required": false},
   "height": {"type": "Number", "required": false}
 }
